@@ -1,7 +1,7 @@
 # Importing required modules
-import sys 
-import requests
-from bs4 import BeautifulSoup
+import sys # for taking url from command line
+import requests # sending get request and connect with server
+from bs4 import BeautifulSoup # for parsing html 
 
 class WebCrawlerClient:
     def __init__(self, url): 
@@ -47,6 +47,11 @@ class WebCrawlerProject:
                 raise ValueError("ERROR: URL Required")
             
             url = sys.argv[1]
+
+            # check if url startswith https://
+            if not url.startswith("https://"):
+                url = "https://" + url
+
             html = WebCrawlerClient(url).fetch()
             parser = WebPageParser(html)
             
